@@ -5,22 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/splashScreenContainer"
-    tools:context=".DogsSplashActivity">
+    tools:context=".view.DogsSplashActivity">
 
     <TextView
         android:id="@+id/appHeadingTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DOGS API"
+        android:text="PAWS"
+        android:fontFamily="serif-monospace"
+        android:layout_marginTop="100dp"
+        android:textSize="48sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/dogsSplashImageview"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="24dp"
+        android:src="@drawable/dogs_background"
         app:layout_constraintTop_toBottomOf="@id/appHeadingTextview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

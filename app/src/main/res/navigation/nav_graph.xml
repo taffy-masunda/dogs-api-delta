@@ -7,17 +7,23 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="za.co.trutz.dogsapidelta.FirstFragment"
+        android:name="za.co.trutz.dogsapidelta.view.DogListFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment" >
+            <argument
+                android:name="argImageUrl"
+                app:argType="string"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="za.co.trutz.dogsapidelta.SecondFragment"
+        android:name="za.co.trutz.dogsapidelta.view.DogBigImageFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

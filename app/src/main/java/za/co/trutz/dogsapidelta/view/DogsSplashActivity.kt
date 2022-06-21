@@ -1,4 +1,4 @@
-package za.co.trutz.dogsapidelta
+package za.co.trutz.dogsapidelta.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

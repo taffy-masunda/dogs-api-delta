@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="za.co.trutz.dogsapidelta">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,16 +16,17 @@
         android:theme="@style/Theme.DogsApiDelta"
         tools:targetApi="31">
         <activity
-            android:name=".DogsSplashActivity"
+            android:name=".view.DogsSplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.DogsApiDelta.NoActionBar">
