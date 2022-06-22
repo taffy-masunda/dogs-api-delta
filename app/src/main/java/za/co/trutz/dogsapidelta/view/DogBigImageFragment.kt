@@ -17,20 +17,20 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import za.co.trutz.dogsapidelta.R
-import za.co.trutz.dogsapidelta.databinding.FragmentSecondBinding
+import za.co.trutz.dogsapidelta.databinding.FragmentDogImageBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 class DogBigImageFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentDogImageBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentDogImageBinding.inflate(inflater, container, false)
         return binding.root
     }
 

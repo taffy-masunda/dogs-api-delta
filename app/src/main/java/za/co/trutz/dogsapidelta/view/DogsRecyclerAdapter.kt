@@ -11,15 +11,12 @@ import com.bumptech.glide.Glide
 import za.co.trutz.dogsapidelta.R
 import za.co.trutz.dogsapidelta.databinding.SingleDogImageItemLayoutBinding
 
-class DogsRecyclerAdapter(private var passedInterface: DogRecyclerInterface) :
-    RecyclerView.Adapter<DogsRecyclerAdapter.DogViewHolder>() {
+class DogsRecyclerAdapter : RecyclerView.Adapter<DogsRecyclerAdapter.DogViewHolder>() {
 
-    private lateinit var recyclerInterface: DogRecyclerInterface
+    private var dogsList: MutableList<String> = ArrayList()
 
-    private var dogsList = mutableListOf<String>()
     fun setDogsList(dogsList: List<String>) {
         this.dogsList = dogsList.toMutableList()
-        this.recyclerInterface = passedInterface
         notifyDataSetChanged()
     }
 
@@ -35,7 +32,6 @@ class DogsRecyclerAdapter(private var passedInterface: DogRecyclerInterface) :
 
         Glide.with(holder.itemView.context)
             .load(dog)
-            .placeholder(R.drawable.ic_image_loading_24)
             .error(R.drawable.paw_placeholder)
             .centerCrop()
             .into(holder.binding.dogImageView)
@@ -46,7 +42,7 @@ class DogsRecyclerAdapter(private var passedInterface: DogRecyclerInterface) :
                 bundle.putString(DOG_KEY, dog)
 
                 findNavController(holder.itemView.findFragment()).navigate(
-                    R.id.action_FirstFragment_to_SecondFragment,
+                    R.id.action_DogListFragment_to_DogBigImageFragment,
                     bundle
                 )
             }

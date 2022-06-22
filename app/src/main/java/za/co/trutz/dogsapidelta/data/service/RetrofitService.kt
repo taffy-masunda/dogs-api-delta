@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface RetrofitService {
-    @GET("breeds/image/random/15")
+    @GET("breeds/image/random/20")
     fun getDogs(): Call<DogsResponse>
 
     companion object {

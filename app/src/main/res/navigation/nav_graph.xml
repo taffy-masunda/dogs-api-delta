@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/DogListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/DogListFragment"
         android:name="za.co.trutz.dogsapidelta.view.DogListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_dogs_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" >
+            android:id="@+id/action_DogListFragment_to_DogBigImageFragment"
+            app:destination="@id/DogBigImageFragment" >
             <argument
                 android:name="argImageUrl"
                 app:argType="string"
@@ -22,13 +22,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/DogBigImageFragment"
         android:name="za.co.trutz.dogsapidelta.view.DogBigImageFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_dog_image">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_DogBigImageFragment_to_DogListFragment"
+            app:destination="@id/DogListFragment" />
     </fragment>
 </navigation>

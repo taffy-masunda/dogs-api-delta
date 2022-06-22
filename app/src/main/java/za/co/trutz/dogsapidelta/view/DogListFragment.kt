@@ -7,25 +7,29 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import za.co.trutz.dogsapidelta.data.service.DogsRepository
 import za.co.trutz.dogsapidelta.data.service.RetrofitService
-import za.co.trutz.dogsapidelta.databinding.FragmentFirstBinding
+import za.co.trutz.dogsapidelta.databinding.FragmentDogsListBinding
 import za.co.trutz.dogsapidelta.viewmodel.DogsViewModel
 import za.co.trutz.dogsapidelta.viewmodel.DogsViewModelFactory
 
-class DogListFragment : Fragment(), DogRecyclerInterface {
+class DogListFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentDogsListBinding? = null
     private lateinit var viewModel: DogsViewModel
     private val retrofitService = RetrofitService.getInstance()
-    private val adapter = DogsRecyclerAdapter(this)
     private val binding get() = _binding!!
+    private lateinit var adapter: DogsRecyclerAdapter
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private var isPageLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentDogsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,6 +40,32 @@ class DogListFragment : Fragment(), DogRecyclerInterface {
             ViewModelProvider(this, DogsViewModelFactory(DogsRepository(retrofitService)))
                 .get(DogsViewModel::class.java)
 
+        layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.dogsListRecyclerView.layoutManager = layoutManager
+        
+        getMoreDogs()
+
+        binding.dogsListRecyclerView.addOnScrollListener( object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if(dy >= 0){
+                    val visibleItemCount = layoutManager.childCount
+                    val pastVisibleItem = (layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+                    val totalDogItems = adapter.itemCount
+
+                    if (!isPageLoading){
+                        if((visibleItemCount + pastVisibleItem) >= totalDogItems){
+                            viewModel.loading
+                            getMoreDogs()
+                        }
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
+    }
+
+    private fun getMoreDogs (){
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.loadingDialog.visibility = View.VISIBLE
@@ -55,11 +85,12 @@ class DogListFragment : Fragment(), DogRecyclerInterface {
             Toast.makeText(context, "Error fetching dog data!", Toast.LENGTH_SHORT).show()
         }
 
-        binding.dogsListRecyclerView.adapter = adapter
         viewModel.dogsList.observe(viewLifecycleOwner) {
+            adapter = DogsRecyclerAdapter()
             adapter.setDogsList(it.message)
+            adapter.notifyDataSetChanged()
+            binding.dogsListRecyclerView.adapter = adapter
         }
-
         viewModel.getDogs()
     }
 
@@ -67,6 +98,4 @@ class DogListFragment : Fragment(), DogRecyclerInterface {
         super.onDestroyView()
         _binding = null
     }
-
-    override fun onDogItemImageClick(imageUrl: String) {}
 }
