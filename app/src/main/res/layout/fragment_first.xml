@@ -33,7 +33,7 @@
         android:id="@+id/errorMessageTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/error_fetching_your_best_friend_nplease_try_again_later"
+        android:text="@string/error_fetching_your_best_friend_please_try_again_later"
         android:textAlignment="center"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"

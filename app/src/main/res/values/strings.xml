@@ -10,5 +10,7 @@
     <string name="description_single_dog_image_view">single dog image view</string>
     <string name="share">Share</string>
     <string name="download">Download</string>
-    <string name="error_fetching_your_best_friend_nplease_try_again_later">Error fetching your best friend. \nPlease try again later.</string>
+    <string name="error_fetching_your_best_friend_please_try_again_later">Error fetching your best friend. \nPlease try again later.</string>
+    <string name="paws">PAWS</string>
+    <string name="splash_screen_paws_image_description">splash screen paws image description</string>
 </resources>
